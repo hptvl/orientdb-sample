@@ -11,8 +11,6 @@ import com.tinkerpop.blueprints.impls.orient.OrientVertex;
 
 public class OrientDBFactory {
 	public static final int MAX_INSERT_TRANSACTION = 8000;
-	// private static OrientGraph graphTx;
-	// private static OrientGraphNoTx graphNoTx;
 	private static OrientBaseGraph graph;
 	private static OrientGraphFactory factory;
 
@@ -30,9 +28,13 @@ public class OrientDBFactory {
 
 	}
 
-	public static Object executeQuery(String query) {
+	public static Object executeQuery(String query, Object[] params) {
 		OCommandSQL sql = new OCommandSQL(query);
-		return graph.command(sql).execute();
+		if (params != null) {
+			return graph.command(sql).execute(params);
+		} else {
+			return graph.command(sql).execute();
+		}
 	}
 
 	public static OrientVertex insertVertex(String className, Map<String, Object> properties) {
@@ -51,6 +53,10 @@ public class OrientDBFactory {
 		if (factory != null) {
 			factory.close();
 		}
+	}
+
+	public static void commit() {
+		graph.commit();
 	}
 
 	public static void setStandardElementConstraints(boolean flag) {
