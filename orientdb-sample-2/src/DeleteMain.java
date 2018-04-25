@@ -7,7 +7,7 @@ public class DeleteMain {
 		OrientDBFactory.init("remote:192.168.10.212/test-2", "root", "igloosec", 1, 10, true);
 		try {
 			long sTime = System.nanoTime();
-			OrientDBDeleteQuery.deleteAllVertices();
+			OrientDBDeleteQuery.deleteAllIPSs();
 			long eTime = System.nanoTime();
 			long elapsedTime = eTime - sTime;
 			System.out.println("##########################################");

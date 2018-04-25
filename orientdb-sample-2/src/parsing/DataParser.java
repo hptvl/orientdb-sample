@@ -38,6 +38,7 @@ public class DataParser {
 			obj.put("id", id + "_" + record.getRecordNumber());
 			obj.put("occurTime", ESMOntGeneralUtil.convertDateString2Unixtime(record.get(ESM_FIELDS[1]), timeFormat));
 			obj.put("endTime", ESMOntGeneralUtil.convertDateString2Unixtime(record.get(ESM_FIELDS[2]), timeFormat));
+			obj.put("ruleName", record.get(ESM_FIELDS[3]));
 			obj.put("logType", "ESM");
 
 			obj.put("logSourceIP", record.get(ESM_FIELDS[4]));
